@@ -1,9 +1,9 @@
 {
   "devToolsPort": 19002,
-  "expoServerPort": 19000,
-  "packagerPort": 19001,
-  "packagerPid": 5896,
-  "expoServerNgrokUrl": "https://yn-kga.1994619946.jobs.exp.direct",
-  "packagerNgrokUrl": "https://packager.yn-kga.1994619946.jobs.exp.direct",
-  "ngrokPid": 6008
+  "expoServerPort": null,
+  "packagerPort": null,
+  "packagerPid": null,
+  "expoServerNgrokUrl": null,
+  "packagerNgrokUrl": null,
+  "ngrokPid": null
 }

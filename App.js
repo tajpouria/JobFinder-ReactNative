@@ -1,36 +1,50 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { Provider } from 'react-redux';
 import {
   createBottomTabNavigator,
   createAppContainer,
   createStackNavigator
 } from 'react-navigation';
 
-import WelcomeScreen from './screens/WelcomeScreen';
+import { MapScreen, DeckScreen, ReviewScreen, SettingScreen } from './screens';
+
 import AuthScreen from './screens/AuthScreen';
-import DeckScreen from './screens/DeckScreen';
-import MapScreen from './screens/MapScreen';
-import ReviewScreen from './screens/ReviewScreen';
-import SettingScreen from './screens/SettingScreen';
+import WelcomeScreen from './screens/WelcomeScreen';
+
+import store from './store';
+
+const TabNavigator = createBottomTabNavigator(
+  {
+    welcome: WelcomeScreen,
+    auth: AuthScreen,
+    main: createBottomTabNavigator({
+      deck: DeckScreen,
+      map: MapScreen,
+      review: createStackNavigator({
+        review: ReviewScreen,
+        setting: SettingScreen
+      })
+    })
+  },
+  {
+    defaultNavigationOptions: {
+      tabBarVisible: false
+    }
+  }
+);
+
+let Navigation = createAppContainer(TabNavigator);
 
 class App extends React.Component {
   render() {
-    return <View style={styles.container} />;
+    return (
+      <Provider store={store}>
+        <Navigation />
+      </Provider>
+    );
   }
 }
-
-const TabNavigator = createBottomTabNavigator({
-  welcome: WelcomeScreen,
-  auth: AuthScreen,
-  main: createBottomTabNavigator({
-    deck: DeckScreen,
-    map: MapScreen,
-    review: createStackNavigator({
-      review: ReviewScreen,
-      setting: SettingScreen
-    })
-  })
-});
 
 const styles = StyleSheet.create({
   container: {
@@ -41,4 +55,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default createAppContainer(TabNavigator);
+export default App;

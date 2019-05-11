@@ -16,7 +16,7 @@ const SLIDES_DATA = [
   }
 ];
 
-export default class WelcomeScreen extends Component {
+class WelcomeScreen extends Component {
   navigateToAuth = () => {
     this.props.navigation.navigate('auth');
   };
@@ -25,3 +25,5 @@ export default class WelcomeScreen extends Component {
     return <Slides data={SLIDES_DATA} authScreen={this.navigateToAuth} />;
   }
 }
+
+export { WelcomeScreen };

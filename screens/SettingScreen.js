@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 
-export default class SettingScreen extends Component {
+class SettingScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -15,3 +15,5 @@ export default class SettingScreen extends Component {
     );
   }
 }
+
+export { SettingScreen };

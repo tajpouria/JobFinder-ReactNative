@@ -209,11 +209,64 @@ export default function(state={}, action){
 
   //4 connect component to states and actions
     import { connect } from 'react-redux'
+    ***// it seems like react-redux v 7.0.0 have a bug by react native
+      //i usede react-redux@6.0.1
+
+      //clearing catch after uninstall a node package
+      > expo r -c
+
+
     import * as actions from './actions'
 
     componentDidMount(){
-      this.props.facebookLogin()  //actions are available on 
+      this.props.facebookLogin()  //actions are available on props
+    }
+
+
+    function mapStateToProps(state or {auth}){
+      return {token: auth.token}
     }
 
     export default connect(mapStateToProps or null, actions)
     
+
+  // a little bit React lifeSycle
+
+    componentDidMount(){} //will calling when component render(born)
+
+     //wil calling when component receive new Props and calling with new props
+    componentWillReceiveProps(nextProps){  
+      this.onAuthComplete(nextProps) //calling a function by new props 
+    }
+
+3. async lifeCycles //it's also possible to using lifeCycle methods asynchronous
+
+  e.g.
+
+  async ComponentWillMount(){
+    const token = await AsyncStorage.getItems('fb_token')
+  }
+
+4. react navigation expo setup 
+
+const TabNavigator = createBottomTabNavigator({
+  welcome: WelcomeScreen,
+  auth: AuthScreen,
+  main: createBottomTabNavigator({
+    deck: DeckScreen,
+    map: MapScreen,
+    review: createStackNavigator({
+      review: ReviewScreen,
+      setting: SettingScreen
+    })
+  })
+});
+
+let Navigation = createAppContainer(TabNavigator);
+
+  <Provider store={store}>
+    <Navigation />
+  </Provider>
+
+
+export default App;

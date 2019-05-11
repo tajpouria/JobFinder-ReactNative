@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, Platform } from 'react-native';
 import { Button } from 'react-native-elements';
 
-export default class ReviewScreen extends Component {
+class ReviewScreen extends Component {
   static navigationOptions = ({ navigation }) => {
     return {
       headerTitle: 'ReviewScreen',
@@ -29,3 +29,5 @@ export default class ReviewScreen extends Component {
     );
   }
 }
+
+export { ReviewScreen };
