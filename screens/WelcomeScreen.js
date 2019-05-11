@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, AsyncStorage } from 'react-native';
+import { connect } from 'react-redux';
+import { AppLoading } from 'expo';
 
 import Slides from '../components/Slides';
 
@@ -17,13 +19,43 @@ const SLIDES_DATA = [
 ];
 
 class WelcomeScreen extends Component {
-  navigateToAuth = () => {
+  constructor(props) {
+    super(props);
+    this.state = {
+      token: ''
+    };
+  }
+
+  async componentDidMount() {
+    AsyncStorage.removeItem('fb-token');
+    const token = await AsyncStorage.getItem('fb-token');
+
+    if (token) this.props.navigation.navigate('map');
+    this.setState({ token: false });
+  }
+
+  navigateToAuth() {
     this.props.navigation.navigate('auth');
-  };
+  }
+
+  loading() {
+    if (this.state.token === '') return <AppLoading />;
+    else if (this.state.token === false)
+      return (
+        <Slides
+          data={SLIDES_DATA}
+          authScreen={this.navigateToAuth.bind(this)}
+        />
+      );
+  }
 
   render() {
-    return <Slides data={SLIDES_DATA} authScreen={this.navigateToAuth} />;
+    return this.loading();
   }
 }
 
-export { WelcomeScreen };
+const mapStateToProps = ({ auth }) => {
+  return { token: auth.token };
+};
+
+export default connect(mapStateToProps)(WelcomeScreen);

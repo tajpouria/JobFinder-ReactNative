@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { AppLoading } from 'expo';
 import { connect } from 'react-redux';
 
 import * as actions from '../actions';
@@ -9,16 +9,20 @@ class AuthScreen extends Component {
     this.props.facebookLogin();
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.token) return this.props.navigation.navigate('map');
+  }
+
   render() {
-    return (
-      <View>
-        <Text> AuthScreen </Text>
-      </View>
-    );
+    return <AppLoading />;
   }
 }
 
+const mapStateToProps = ({ auth }) => {
+  return { token: auth.token };
+};
+
 export default connect(
-  null,
+  mapStateToProps,
   actions
 )(AuthScreen);
