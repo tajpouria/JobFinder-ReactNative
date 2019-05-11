@@ -27,7 +27,6 @@ class WelcomeScreen extends Component {
   }
 
   async componentDidMount() {
-    AsyncStorage.removeItem('fb-token');
     const token = await AsyncStorage.getItem('fb-token');
 
     if (token) this.props.navigation.navigate('map');

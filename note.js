@@ -43,9 +43,7 @@ const TabNavigator = createBottomTabNavigator({
     })
 
   })
-}, {navigationOptions:{
-  tabBar: {visivle: false} //hide the tabBar 
-},
+}, { defaultNavigationOptions: {tabBarVisible: false}
 lazy: true})  ********// by default react navigation render all screen provided in TabNavigator even user not visit it by setting lazy option 
                           // it will render the Screens when user try to see the screen
 
@@ -106,7 +104,12 @@ class ReviewScreen extends Component{
      <Button 
      title="Onwards!" 
      containerStyle={{ marginTop: 10 }}  
-     titleStyle={{color:'red'}}/>
+     titleStyle={{color:'red'}}
+     large
+     icon={{name:'search'}}
+     />
+  //react native elements Card
+   <Card title='atitle' />
   //passing multi style
   style={[styles.slideContainer, { backgroundColor: slide.color }]}
 
@@ -180,7 +183,7 @@ export default function(state={}, action){
 
     export const facebookLogin = () => async dispatch =>{ //dispatch is provided by redux-thunk and using for dispatching type and payload
       let token = await AsyncStorage.getItem('fb_token')
-      
+               ***** // whenever we return a function from action creator and thunk as wire upe that function will be call with dispatch 
       if(token) {
         dispatch({type: FACEBOOK_LOGIN_SUCCESS, payload: token})
       }else{
@@ -224,7 +227,7 @@ export default function(state={}, action){
 
 
     function mapStateToProps(state or {auth}){
-      return {token: auth.token}
+      return {token: a  uth.token}
     }
 
     export default connect(mapStateToProps or null, actions)
@@ -270,3 +273,58 @@ let Navigation = createAppContainer(TabNavigator);
 
 
 export default App;
+
+## Section Three (MapView in reactNative)
+
+1. showing a map
+
+import {MapView} from 'expo'
+
+<View style={{flex:1}}>
+  <MapView style={{flex:1}}/>
+</View>
+
+2. interact with MapView
+
+  1.region:
+
+    state = {
+      //region is a Object => centering map and zooming  
+      region:{
+        longitude: -122,
+        latitude: 37,
+        longitudeDelta: 0.04,
+        latitudeDelta: 0.09
+      }
+    }
+
+    <MapView region={this.state.region} />
+
+  2. OnRegionChangeComplete:
+
+  // this property will call whenever user move around the map and we can use it to update region
+    OnRegionChangeComplete=(region)=>{
+      this.ListeningStateChangedEvent({region})
+    }
+  
+    <mapView OnRegionChangeComplete={this.OnRegionChangeComplete}/>
+
+3.  using qs module //is short fro queryString it using for turn js object to string
+ 
+> npm i qs
+
+const JOBS_QUERY_PARMAS = {
+  publisher: '4321353541',
+  form : 'json',
+  v: '2',
+  latlong: 1,
+  radius: 10,
+  q: 'javascript'
+}
+
+conts query = qs.stringify({...JOBS_QUERY_PARMAS, l: zip})
+return `site.com/${query}`
+
+4. replace js built in function // it will look for given element into string and replace it by another given screen
+
+jobs.snippets.replace(/<b>/g,'').replace(/<\/b/g, '')
