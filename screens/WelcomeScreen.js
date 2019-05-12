@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, AsyncStorage } from 'react-native';
+import { AsyncStorage } from 'react-native';
 import { connect } from 'react-redux';
 import { AppLoading } from 'expo';
 
@@ -29,23 +29,25 @@ class WelcomeScreen extends Component {
   async componentDidMount() {
     const token = await AsyncStorage.getItem('fb-token');
 
-    if (token) this.props.navigation.navigate('map');
-    this.setState({ token: false });
+    if (token) {
+      this.setState({ token });
+      const { navigation } = this.props;
+      return navigation.navigate('map');
+    }
+
+    return this.setState({ token: false });
   }
 
-  navigateToAuth() {
-    this.props.navigation.navigate('auth');
-  }
+  navigateToAuth = () => {
+    const { navigation } = this.props;
+    navigation.navigate('auth');
+  };
 
   loading() {
-    if (this.state.token === '') return <AppLoading />;
-    else if (this.state.token === false)
-      return (
-        <Slides
-          data={SLIDES_DATA}
-          authScreen={this.navigateToAuth.bind(this)}
-        />
-      );
+    const { token } = this.state;
+    if (token === '') return <AppLoading />;
+
+    return <Slides data={SLIDES_DATA} authScreen={this.navigateToAuth} />;
   }
 
   render() {
@@ -53,8 +55,6 @@ class WelcomeScreen extends Component {
   }
 }
 
-const mapStateToProps = ({ auth }) => {
-  return { token: auth.token };
-};
+const mapStateToProps = ({ auth }) => ({ token: auth.token });
 
 export default connect(mapStateToProps)(WelcomeScreen);

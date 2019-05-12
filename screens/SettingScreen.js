@@ -16,4 +16,4 @@ class SettingScreen extends Component {
   }
 }
 
-export { SettingScreen };
+export default SettingScreen;

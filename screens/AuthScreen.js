@@ -6,11 +6,13 @@ import * as actions from '../actions';
 
 class AuthScreen extends Component {
   componentDidMount() {
-    this.props.facebookLogin();
+    const { facebookLogin } = this.props;
+    facebookLogin();
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.token) return this.props.navigation.navigate('map');
+  componentWillReceiveProps() {
+    const { token, navigation } = this.props;
+    if (token) navigation.navigate('map');
   }
 
   render() {
@@ -18,9 +20,7 @@ class AuthScreen extends Component {
   }
 }
 
-const mapStateToProps = ({ auth }) => {
-  return { token: auth.token };
-};
+const mapStateToProps = ({ auth }) => ({ token: auth.token });
 
 export default connect(
   mapStateToProps,

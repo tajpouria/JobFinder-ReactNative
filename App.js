@@ -1,5 +1,4 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
 import { Provider } from 'react-redux';
 import {
   createBottomTabNavigator,
@@ -7,8 +6,10 @@ import {
   createStackNavigator
 } from 'react-navigation';
 
-import { MapScreen, DeckScreen, ReviewScreen, SettingScreen } from './screens';
-
+import MapScreen from './screens/MapScreen';
+import DeckScreen from './screens/DeckScreen';
+import SettingScreen from './screens/SettingScreen';
+import ReviewScreen from './screens/ReviewScreen';
 import AuthScreen from './screens/AuthScreen';
 import WelcomeScreen from './screens/WelcomeScreen';
 
@@ -34,25 +35,10 @@ const TabNavigator = createBottomTabNavigator(
   }
 );
 
-let Navigation = createAppContainer(TabNavigator);
+const Navigation = createAppContainer(TabNavigator);
 
-class App extends React.Component {
-  render() {
-    return (
-      <Provider store={store}>
-        <Navigation />
-      </Provider>
-    );
-  }
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center'
-  }
-});
-
-export default App;
+export default () => (
+  <Provider store={store}>
+    <Navigation />
+  </Provider>
+);

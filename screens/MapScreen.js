@@ -16,4 +16,4 @@ class MapScreen extends Component {
   }
 }
 
-export { MapScreen };
+export default MapScreen;

@@ -3,23 +3,21 @@ import { View, Text, Platform } from 'react-native';
 import { Button } from 'react-native-elements';
 
 class ReviewScreen extends Component {
-  static navigationOptions = ({ navigation }) => {
-    return {
-      headerTitle: 'ReviewScreen',
-      headerRight: (
-        <Button
-          onPress={({}) => {
-            navigation.navigate('setting');
-          }}
-          containerStyle={{ marginRight: 15 }}
-          title="Setting"
-        />
-      ),
-      style: {
-        marginTop: Platform.OS === 'andrpid' ? 25 : 0
-      }
-    };
-  };
+  static navigationOptions = ({ navigation }) => ({
+    headerTitle: 'ReviewScreen',
+    headerRight: (
+      <Button
+        onPress={() => {
+          navigation.navigate('setting');
+        }}
+        containerStyle={{ marginRight: 15 }}
+        title="Setting"
+      />
+    ),
+    style: {
+      marginTop: Platform.OS === 'android' ? 25 : 0
+    }
+  });
 
   render() {
     return (
@@ -30,4 +28,4 @@ class ReviewScreen extends Component {
   }
 }
 
-export { ReviewScreen };
+export default ReviewScreen;

@@ -16,4 +16,4 @@ class DeckScreen extends Component {
   }
 }
 
-export { DeckScreen };
+export default DeckScreen;
