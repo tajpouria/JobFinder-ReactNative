@@ -7,8 +7,11 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "expo": "^32.0.0",
+    "latlng-to-zip": "0.0.2",
     "lodash": "^4.17.11",
+    "qs": "^6.7.0",
     "react": "16.5.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz",
     "react-native-elements": "^1.1.0",

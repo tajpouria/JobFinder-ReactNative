@@ -36,6 +36,7 @@ class WelcomeScreen extends Component {
     }
 
     return this.setState({ token: false });
+    
   }
 
   navigateToAuth = () => {
