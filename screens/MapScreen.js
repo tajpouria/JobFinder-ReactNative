@@ -21,10 +21,15 @@ class MapScreen extends Component {
 
   onRegionChangeComplete = region => this.setState({ region });
 
+  navigateToDeckScreen = () => {
+    const { navigate } = this.props.navigation;
+    navigate('deck');
+  };
+
   onButtonPress = () => {
     const { fetchJobs } = this.props;
     const { region } = this.state;
-    fetchJobs(region);
+    fetchJobs(region, this.navigateToDeckScreen);
   };
 
   render() {

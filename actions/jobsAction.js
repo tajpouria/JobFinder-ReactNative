@@ -1,4 +1,3 @@
-import reverseGeocode from 'latlng-to-zip';
 import qs from 'qs';
 import axios from 'axios';
 
@@ -13,7 +12,7 @@ const JOB_QUERY_PARAMS = {
   q: 'javascript'
 };
 
-const builJobUrl = postal =>
+const buildJobUrl = postal =>
   `http://api.indeed.com/ads/apisearch?${qs.stringify({
     ...JOB_QUERY_PARAMS,
     l: postal
@@ -26,9 +25,18 @@ const getPostal = async (latitude, longitude) => {
   return res.data.alt.loc[0].postal;
 };
 
-export const fetchJobs = ({ latitude, longitude }) => async dispatch => {
-  const postal = await getPostal(latitude, longitude);
+export const fetchJobs = (
+  { latitude, longitude },
+  navigateToDeckScreen
+) => async dispatch => {
+  try {
+    const postal = await getPostal(latitude, longitude);
 
-  const result = await axios.get(builJobUrl(postal));
-  console.log(result.data);
+    const result = await axios.get(buildJobUrl(postal));
+
+    dispatch({ type: FETCH_JOBS, payload: result.data });
+    navigateToDeckScreen();
+  } catch (ex) {
+    throw new Error(ex.massage);
+  }
 };
