@@ -1,19 +1,28 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
+import { connect } from 'react-redux';
+import { Button } from 'react-native-elements';
+
+import * as actions from '../actions';
 
 class SettingScreen extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
   render() {
+    const { clearLikedJobs } = this.props;
+
     return (
-      <View>
-        <Text> SettingScreen </Text>
+      <View style={{ marginTop: 10 }}>
+        <Button
+          onPress={() => clearLikedJobs()}
+          large
+          title="Clear All Liked Jobs List"
+          icon={{ name: 'delete-forever' }}
+        />
       </View>
     );
   }
 }
 
-export default SettingScreen;
+export default connect(
+  null,
+  actions
+)(SettingScreen);

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { MapView } from 'expo';
 import { connect } from 'react-redux';
-import { Button } from 'react-native-elements';
+import { Button, Icon } from 'react-native-elements';
 
 import * as actions from '../actions';
 
@@ -19,10 +19,18 @@ class MapScreen extends Component {
     };
   }
 
+  static navigationOptions = {
+    title: 'Map',
+    tabBarIcon: ({ tintColor }) => (
+      <Icon name="my-location" color={tintColor} size={30} />
+    )
+  };
+
   onRegionChangeComplete = region => this.setState({ region });
 
   navigateToDeckScreen = () => {
     const { navigate } = this.props.navigation;
+
     navigate('deck');
   };
 

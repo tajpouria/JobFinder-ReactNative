@@ -1,7 +1,7 @@
 import qs from 'qs';
 import axios from 'axios';
 
-import { FETCH_JOBS } from './types';
+import { FETCH_JOBS, LIKED_JOB, CLEAR_LIKED_JOBS } from './types';
 
 const JOB_QUERY_PARAMS = {
   publisher: '1397045879077994',
@@ -40,3 +40,7 @@ export const fetchJobs = (
     throw new Error(ex.massage);
   }
 };
+
+export const likeJob = job => ({ type: LIKED_JOB, payload: job });
+
+export const clearLikedJobs = () => ({ type: CLEAR_LIKED_JOBS });

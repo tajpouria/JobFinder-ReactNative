@@ -5,6 +5,7 @@ import {
   createAppContainer,
   createStackNavigator
 } from 'react-navigation';
+import { Icon } from 'react-native-elements';
 
 import MapScreen from './screens/MapScreen';
 import DeckScreen from './screens/DeckScreen';
@@ -20,12 +21,22 @@ const TabNavigator = createBottomTabNavigator(
     welcome: WelcomeScreen,
     auth: AuthScreen,
     main: createBottomTabNavigator({
-      deck: DeckScreen,
       map: MapScreen,
-      review: createStackNavigator({
-        review: ReviewScreen,
-        setting: SettingScreen
-      })
+      deck: DeckScreen,
+      review: createStackNavigator(
+        {
+          review: ReviewScreen,
+          setting: SettingScreen
+        },
+        {
+          navigationOptions: {
+            tabBarLabel: 'Liked',
+            tabBarIcon: ({ tintColor }) => (
+              <Icon name="favorite" color={tintColor} size={30} />
+            )
+          }
+        }
+      )
     })
   },
   {
