@@ -6,6 +6,9 @@ import {
   createStackNavigator
 } from 'react-navigation';
 import { Icon } from 'react-native-elements';
+import { PersistGate } from 'redux-persist/integration/react';
+import { persistStore } from 'redux-persist';
+import { View, ActivityIndicator } from 'react-native';
 
 import MapScreen from './screens/MapScreen';
 import DeckScreen from './screens/DeckScreen';
@@ -14,7 +17,7 @@ import ReviewScreen from './screens/ReviewScreen';
 import AuthScreen from './screens/AuthScreen';
 import WelcomeScreen from './screens/WelcomeScreen';
 
-import store from './store';
+import { store, persistor } from './store';
 
 const TabNavigator = createBottomTabNavigator(
   {
@@ -47,9 +50,20 @@ const TabNavigator = createBottomTabNavigator(
 );
 
 const Navigation = createAppContainer(TabNavigator);
+const persister = persistStore(store);
+
+renderLoading = () => {
+  return (
+    <View style={{ flex: 1 }}>
+      <ActivityIndicator />
+    </View>
+  );
+};
 
 export default () => (
   <Provider store={store}>
-    <Navigation />
+    <PersistGate persistor={persistor} loading={this.renderLoading()}>
+      <Navigation />
+    </PersistGate>
   </Provider>
 );

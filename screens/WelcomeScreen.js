@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { AppLoading } from 'expo';
 
 import Slides from '../components/Slides';
+import AuthScreen from './AuthScreen';
 
 const SLIDES_DATA = [
   {
@@ -31,12 +32,10 @@ class WelcomeScreen extends Component {
 
     if (token) {
       this.setState({ token });
-      const { navigation } = this.props;
-      return navigation.navigate('map');
+      return <AuthScreen token={token} />;
     }
 
     return this.setState({ token: false });
-    
   }
 
   navigateToAuth = () => {
