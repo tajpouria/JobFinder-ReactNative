@@ -365,7 +365,7 @@ export default App;
 
 ## Section Three ( MapView in reactNative)
 
-````javascript
+```javascript
 1. showing a map
 
 import {MapView} from 'expo'
@@ -454,9 +454,12 @@ jobs.snippets.replace(/<b>/g,'').replace(/<\/b/g, '')
 
 import {Linking} from 'react-native';
 
-Linking.openURL('https://') // open url in devices browser```
+Linking.openURL('https://') // open url in devices browser
+```
+
+## Section Four (Offline Data Persistence)
+
 ```javascript
-## Section three (Offline Data Persistence)
 
 redux-persist
 
@@ -501,9 +504,12 @@ import { store, persistor } from './store';
     </Provider>
   </PersistGate>
 
-*** use redux-persist-migrate whenever changing state while deploying updates```
+*** use redux-persist-migrate whenever changing state while deploying updates
+```
 
-## Section Four (Push Notification)
+
+## Section Five (Push Notification)
+
 ```javascript
 //handling push notification is three steps process in our application
 
@@ -555,4 +561,4 @@ componentDidMount(){
     ) }
   })
 }```
-````
+
