@@ -5,29 +5,21 @@ import { connect } from 'react-redux';
 import * as actions from '../actions';
 
 class AuthScreen extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      state: ''
-    };
-  }
-
   componentDidMount() {
     const { facebookLogin } = this.props;
     facebookLogin();
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState({ token: nextProps.token });
-  }
-
-  navigateToMapScreen(token) {
-    if (this.state.token) return this.props.navigation.navigate('map');
-    return <AppLoading />;
+    const { token } = nextProps;
+    if (token) {
+      const { navigation } = this.props;
+      return navigation.navigate('auth');
+    }
   }
 
   render() {
-    return this.navigateToMapScreen(this.props.token);
+    return <AppLoading />;
   }
 }
 

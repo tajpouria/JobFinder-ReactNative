@@ -7,7 +7,6 @@ import {
 } from 'react-navigation';
 import { Icon } from 'react-native-elements';
 import { PersistGate } from 'redux-persist/integration/react';
-import { persistStore } from 'redux-persist';
 import { View, ActivityIndicator } from 'react-native';
 
 import MapScreen from './screens/MapScreen';
@@ -50,7 +49,6 @@ const TabNavigator = createBottomTabNavigator(
 );
 
 const Navigation = createAppContainer(TabNavigator);
-const persister = persistStore(store);
 
 renderLoading = () => {
   return (
@@ -61,9 +59,9 @@ renderLoading = () => {
 };
 
 export default () => (
-  <Provider store={store}>
-    <PersistGate persistor={persistor} loading={this.renderLoading()}>
+  <PersistGate persistor={persistor}>
+    <Provider store={store}>
       <Navigation />
-    </PersistGate>
-  </Provider>
+    </Provider>
+  </PersistGate>
 );
