@@ -11,12 +11,11 @@ const JOB_QUERY_PARAMS = {
   radius: 10,
   q: 'javascript'
 };
-
-const buildJobUrl = postal =>
-  `http://api.indeed.com/ads/apisearch?${qs.stringify({
-    ...JOB_QUERY_PARAMS,
-    l: postal
-  })}`;
+// prettier-ignore
+const buildJobUrl = postal => `http://api.indeed.com/ads/apisearch?${qs.stringify({
+  ...JOB_QUERY_PARAMS,
+  l: postal
+})}`;
 
 const getPostal = async (latitude, longitude) => {
   const res = await axios.get(

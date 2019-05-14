@@ -9,6 +9,5 @@ export default async () => {
   if (!status === 'granted') return;
 
   const token = await Notifications.getExpoPushTokenAsync();
-  console.log(token);
   await AsyncStorage.setItem('pushtoken', token);
 };

@@ -55,7 +55,9 @@ class DeckScreen extends Component {
   };
 
   renderNoMoreCards = () => {
-    const { navigate } = this.props.navigation;
+    const {
+      navigation: { navigate }
+    } = this.props;
     return (
       <Card title="No Jobs Available!">
         <Button
@@ -80,8 +82,7 @@ class DeckScreen extends Component {
     );
   }
 }
-{
-}
+
 const mapStateToProps = ({ jobs }) => ({ jobs });
 
 const styles = StyleSheet.create({

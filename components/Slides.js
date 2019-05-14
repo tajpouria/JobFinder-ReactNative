@@ -6,19 +6,25 @@ const SCREEN_WIDTH = Dimensions.get('window').width;
 
 export default class Slides extends Component {
   lastSlideButton(index) {
-    if (index === this.props.data.length - 1) {
+    const {
+      data: { length },
+      authScreen
+    } = this.props;
+    if (index === length - 1) {
       return (
         <Button
           title="Onwards!"
           containerStyle={{ marginTop: 10 }}
-          onPress={this.props.authScreen}
+          onPress={authScreen}
         />
       );
     }
+    return undefined;
   }
 
   renderSlides() {
-    return this.props.data.map((slide, index) => {
+    const { data } = this.props;
+    return data.map((slide, index) => {
       return (
         <View
           style={[styles.slideContainer, { backgroundColor: slide.color }]}

@@ -7,6 +7,13 @@ import { Button, Icon } from 'react-native-elements';
 import * as actions from '../actions';
 
 class MapScreen extends Component {
+  static navigationOptions = {
+    title: 'Map',
+    tabBarIcon: ({ tintColor }) => (
+      <Icon name="my-location" color={tintColor} size={30} />
+    )
+  };
+
   constructor(props) {
     super(props);
     this.state = {
@@ -19,17 +26,12 @@ class MapScreen extends Component {
     };
   }
 
-  static navigationOptions = {
-    title: 'Map',
-    tabBarIcon: ({ tintColor }) => (
-      <Icon name="my-location" color={tintColor} size={30} />
-    )
-  };
-
   onRegionChangeComplete = region => this.setState({ region });
 
   navigateToDeckScreen = () => {
-    const { navigate } = this.props.navigation;
+    const {
+      navigation: { navigate }
+    } = this.props;
 
     navigate('deck');
   };

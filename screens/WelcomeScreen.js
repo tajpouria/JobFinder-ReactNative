@@ -29,10 +29,14 @@ class WelcomeScreen extends Component {
   }
 
   async componentDidMount() {
-    let token = await AsyncStorage.getItem('fb-token');
-    this.props.navigation.navigate('map');
+    const {
+      navigation: { navigate }
+    } = this.props;
+
+    const token = await AsyncStorage.getItem('fb-token');
+    navigate('map');
     if (token) {
-      this.props.navigation.navigate('map');
+      navigate('map');
       this.setState({ token });
     } else {
       this.setState({ token: false });
@@ -40,12 +44,15 @@ class WelcomeScreen extends Component {
   }
 
   navigateToAuth() {
-    const { navigate } = this.props.navigation;
+    const {
+      navigation: { navigate }
+    } = this.props;
     return navigate('auth');
   }
 
   render() {
-    if (_.isNull(this.state.token)) {
+    const { token } = this.state;
+    if (_.isNull(token)) {
       return <AppLoading />;
     }
 
