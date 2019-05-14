@@ -1,6 +1,6 @@
 # Local Job Finder
 
-<img src="assets/Screenshot_20190514-184957_Expo.jpg" width="350"> <img src="assets/Screenshot_20190514-185230_Expo.jpg" width="350"> <img src="assets/Screenshot_20190514-185253_Expo.jpg" width="350">
+<img src="assets/Screenshot_20190514-184957_Expo.jpg" width="300"> <img src="assets/Screenshot_20190514-185230_Expo.jpg" width="300"> <img src="assets/Screenshot_20190514-185253_Expo.jpg" width="300">
 
 A practical react-native project in order to increase my mobile development implement skills using javaScript
 
